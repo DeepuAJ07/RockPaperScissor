@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game">
+      <h1 class="gamedev" id="player">Player:</h1>
+      <h1 class="gamedev" id="computer">Computer:</h1>
+      <h1 class="gamedev" id="result">Result:</h1>
+
+      <button class="choice-btn">ROCK</button>
+      <button class="choice-btn">SCISSOR</button>
+      <button class="choice-btn">PAPER</button>
+    </div>
+    <script>
+      let playerText = document.querySelector("#player");
+      let computerText = document.querySelector("#computer");
+      let resultText = document.querySelector("#result");
+      let choice = document.querySelectorAll(".choice-btn");
+      let player;
+      let computer;
+      let result;
+      choice.forEach((button) =>
+        button.addEventListener("click", () => {
+          player = button.textContent;
+          computerTurn();
+          playerText.textContent = `Player: ${player}`;
+          computerText.textContent = `Computer: ${computer}`;
+          resultText.textContent = checkWinner();
+        })
+      );
+
+      function computerTurn() {
+        let randomres = Math.floor(Math.random() * 3) + 1;
+        switch (randomres) {
+          case 1:
+            computer = "ROCK";
+            break;
+          case 2:
+            computer = "PAPER";
+            break;
+          case 3:
+            computer = "SCISSOR";
+            break;
+        }
+      }
+      function checkWinner() {
+        if (player === computer) {
+          return "Draw";
+        } else if (computer === "ROCK") {
+          return player === "PAPER" ? "You Win" : "You Lose";
+        } else if (computer === "PAPER") {
+          return player === "SCISSOR" ? "You Win" : "You Lose";
+        } else if (computer === "SCISSOR") {
+          return player === "ROCK" ? "You Win" : "You Lose";
+        }
+      }
+    </script>
+  </body>
+</html>
